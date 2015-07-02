@@ -1,0 +1,17 @@
+<% if @topic.errors.any? %>
+  <ul>
+    <% @topic.errors.full_messages.each do |msg| %>
+      <li>
+        <%= msg %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="form-group">
+  <%= f.label :title, "文章標題：" %>
+  <%= f.text_field :title, :class => "form-control" %>
+
+  <%= f.label :article, "內文：" %>
+  <%= f.text_area :article, :class => "form-control" %>
+</div>

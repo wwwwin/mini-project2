@@ -3,7 +3,7 @@ class TopicsController < ApplicationController
 before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
   def index
-    @topics = Topic.order(create_at: :desc).page(params[:page]).per(8)
+    @topics = Topic.order(created_at: :desc).page(params[:page]).per(8)
     @topic = Topic.new
   end
 
@@ -15,9 +15,10 @@ before_action :set_topic, only: [:show, :edit, :update, :destroy]
     @topic = Topic.new(topic_params)
     if @topic.save
       flash[:notice] = "新增文章成功！"
-      redirect_to topic_path
+      redirect_to topics_path
     else
       render :new
+    end
   end
 
   def show
@@ -36,6 +37,7 @@ before_action :set_topic, only: [:show, :edit, :update, :destroy]
       redirect_to topic_path
     else
       render :edit
+    end
   end
 
 
@@ -47,14 +49,14 @@ before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
   private
 
-  def topic_params
+    def topic_params
+      params.require( :topic).permit(:title, :article)
+    end
 
-    params.require(:topics).permit(:title, :article)
-
-  end
-
-  def set_topic
-    @topic = Topic.find(params[:id])
-  end
+    def set_topic
+      @topic = Topic.find(params[:id])
+    end
 
 end
+
+

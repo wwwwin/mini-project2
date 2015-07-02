@@ -1,0 +1,33 @@
+<table class="table">
+  <h1>Hi! Win! 你成功了！</h1>
+  <% @topics.each do |topic| %>
+  <tr>
+    <td>
+      <%= topic.title %>
+    </td>
+    <td>
+      <%= topic.created_at %>
+    </td>
+
+    <td>
+      <%= link_to "Show", topic_path(topic), :class => "btn btn-info"   %>
+    </td>
+    <td>
+      <%= link_to "Edit", edit_topic_path(topic), :class => "btn btn-info"  %>
+    </td>
+    <td>
+      <%= link_to "Delete", topic_path(topic), :method => :delete, :data => {:confirm => "你確定要刪除資料?"}, :class => "btn btn-danger" %>
+    </td>
+  <% end %>
+  </tr>
+</table>
+<%# link_to "new", new_topic_path, :class => "btn btn-primary"  %>
+
+<%= form_for @topic, :url => { :controller => 'topics', :action => 'create' } do |f| %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= f.submit "Create", :class => "btn btn-primary" %>
+<% end %>
+
+
+
+
