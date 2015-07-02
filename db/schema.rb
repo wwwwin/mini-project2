@@ -14,6 +14,10 @@
 ActiveRecord::Schema.define(version: 20150701105621) do
 
   create_table "topics", force: :cascade do |t|
+
+    t.string :topic
+    t.text :article
+
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
