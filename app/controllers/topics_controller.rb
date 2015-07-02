@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
 
-before_action :set_topic, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
   def index
     @topics = Topic.order(created_at: :desc).page(params[:page]).per(8)
@@ -31,8 +32,7 @@ before_action :set_topic, only: [:show, :edit, :update, :destroy]
   end
 
   def update
-    @topic = Topic.find(params[:id])
-    if @topic = Topic.update(topic_params)
+    if @topic.update(topic_params)
       flash[:notice] = "修改文章成功！"
       redirect_to topic_path
     else
@@ -50,7 +50,7 @@ before_action :set_topic, only: [:show, :edit, :update, :destroy]
   private
 
     def topic_params
-      params.require( :topic).permit(:title, :article)
+      params.require(:topic).permit(:title, :article)
     end
 
     def set_topic
