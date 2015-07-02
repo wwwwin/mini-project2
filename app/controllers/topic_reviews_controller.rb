@@ -4,7 +4,8 @@ class TopicReviewsController < ApplicationController
 
   def index
     @topic = Topic.find( params[:topic_id] )
-    @reviews = @topic.reviews
+    @reviews = @topic.reviews.order(created_at: :desc).page(params[:page]).per(8)
+    @review = @topic.reviews.build
   end
 
   def show

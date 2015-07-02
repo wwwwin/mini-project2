@@ -11,14 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702132715) do
+ActiveRecord::Schema.define(version: 20150702173646) do
 
   create_table "reviews", force: :cascade do |t|
     t.text     "comment"
     t.integer  "topic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.string   "email"
   end
+
+  add_index "reviews", ["email"], name: "index_reviews_on_email"
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
 
   create_table "topics", force: :cascade do |t|
     t.datetime "created_at", null: false

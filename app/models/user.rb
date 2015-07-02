@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
-  has_many :topics
+  has_many :topics #複數
+  has_many :reviews #複數
 
   def short_name
     self.email.split("@").first
