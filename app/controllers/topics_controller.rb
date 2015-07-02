@@ -14,6 +14,9 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(topic_params)
+
+    @topic.user = current_user
+
     if @topic.save
       flash[:notice] = "新增文章成功！"
       redirect_to topics_path

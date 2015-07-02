@@ -1,9 +1,13 @@
 <table class="table">
   <h1>Hi! Win! 你成功了！</h1>
+
   <% @topics.each do |topic| %>
   <tr>
     <td>
       <%= topic.title %>
+    </td>
+    <td>
+      <%= topic.user.try(:short_name) %>
     </td>
     <td>
       <%= topic.created_at %>

@@ -8,7 +8,8 @@
 </head>
 <body>
 <div class="container">
-
+<p style="color: green"><%= flash[:notice] %></p>
+<p style="color: red"><%= flash[:alert] %></p>
   <% if current_user %>
 
           Hi!,<%= current_user.email %>
@@ -19,7 +20,6 @@
           <%= link_to('登入', new_session_path(:user)) %>
       <% end %>
   <%= yield %>
-
 </div>
 
 </body>
