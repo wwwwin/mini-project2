@@ -1,0 +1,41 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <h2><%= @topic.title %></h2>
+    </div>
+
+    <div class="panel-body">
+      <%= @topic.article %>
+    </div>
+  <table class="table">
+  <% @reviews.each do |review| %>
+  <thead>
+    <tr>
+      <th>留言者</th>
+      <th>留言時間</th>
+      <th>留言內容</th>
+    </tr>
+  </thead>
+
+    <td>
+      <%= review.topic_id %>
+    </td>
+    <td>
+      <%= review.created_at %>
+    </td>
+    <td>
+      <%= review.comment %>
+    </td>
+
+
+
+  <% end %>
+
+  </table>
+</div>
+<h3>文章留言</h3>
+<%= form_for @review do |f| %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= f.submit "新增留言", :class => "btn btn-primary" %>
+<% end %>
+
+<%= link_to "新增留言", new_topic_review_path, :class => "btn btn-primary"  %>

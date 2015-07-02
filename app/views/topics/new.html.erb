@@ -1,0 +1,7 @@
+<%= form_for @topic, :url => { :controller => 'topics', :action => 'create' } do |f| %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= f.submit "Create", :class => "btn btn-primary" %>
+    <%= link_to '回到論壇首頁', topics_path, :class => "btn btn-default" %>
+<% end %>
+
+

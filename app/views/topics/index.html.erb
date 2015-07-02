@@ -22,6 +22,9 @@
     <td>
       <%= link_to "Delete", topic_path(topic), :method => :delete, :data => {:confirm => "你確定要刪除資料?"}, :class => "btn btn-danger" %>
     </td>
+    <td>
+      <%= link_to "Reviews List", topic_reviews_path(topic), :class => "btn btn-info"  %>
+    </td>
   <% end %>
   </tr>
 </table>
@@ -29,7 +32,7 @@
 
 <%= form_for @topic, :url => { :controller => 'topics', :action => 'create' } do |f| %>
     <%= render :partial => 'form', :locals => { :f => f } %>
-    <%= f.submit "Create", :class => "btn btn-primary" %>
+    <%= f.submit "新增文章", :class => "btn btn-primary" %>
 <% end %>
 
 

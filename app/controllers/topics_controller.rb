@@ -47,7 +47,7 @@ class TopicsController < ApplicationController
   def destroy
     @topic.destroy
     flash[:aleart] = "你已經刪除你的文章！"
-    redirect_to :index
+    redirect_to :action => :index
   end
 
   private

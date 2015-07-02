@@ -1,0 +1,4 @@
+<%= form_for @review, :url => { :controller => 'topic_reviews', :action => 'create' } do |f| %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= f.submit "新增留言", :class => "btn btn-primary" %>
+<% end %>
