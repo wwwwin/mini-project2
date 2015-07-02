@@ -22,6 +22,8 @@ gem "better_errors"
 
 gem 'bootstrap-sass', '~> 3.3.5'
 
+ gem 'meta_request'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
