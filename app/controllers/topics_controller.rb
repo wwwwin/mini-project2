@@ -4,7 +4,7 @@ class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
   def index
-    @topics = Topic.order(created_at: :desc).page(params[:page]).per(8)
+    @topics = Topic.order(updated_at: :desc).page(params[:page]).per(8)
     @topic = Topic.new
   end
 

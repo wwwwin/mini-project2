@@ -18,15 +18,15 @@
 <thead>
     <tr>
       <th>留言者</th>
-      <th>留言時間</th>
       <th>留言內容</th>
+      <th>留言時間</th>
       <th>工具</th>
     </tr>
   </thead>
 <% @reviews.each do |review| %>
 <tbody>
   <td>
-    <%= review.user_id  %>
+    <%= review.user_id %>
   </td>
   <td>
     <%= review.comment %>
