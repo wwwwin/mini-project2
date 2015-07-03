@@ -37,7 +37,7 @@ class TopicsController < ApplicationController
   def update
     if @topic.update(topic_params)
       flash[:notice] = "修改文章成功！"
-      redirect_to topic_path
+      redirect_to topics_path
     else
       render :edit
     end
@@ -53,7 +53,7 @@ class TopicsController < ApplicationController
   private
 
     def topic_params
-      params.require(:topic).permit(:title, :article, :category_id)
+      params.require(:topic).permit(:title, :article, :category_id, :select_ids => [])
     end
 
     def set_topic

@@ -22,6 +22,8 @@
 
   <%= f.collection_select(:category_id, Category.all, :id, :name) %>
   <%# f.select :category_id,[["name"],1], :class => "form-control" %>
+
+  <%= f.collection_check_boxes(:select_ids, Select.all, :id, :name) %>
 </div>
 
 <div class="form-group">
