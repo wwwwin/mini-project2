@@ -19,8 +19,11 @@ class TopicReviewsController < ApplicationController
 
   def create
     @review = @topic.reviews.build( review_params )
+     @review.user = current_user
     if @review.save
+      byebug
       redirect_to topic_reviews_url( @topic )
+
     else
       render :action => :new
     end
