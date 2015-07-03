@@ -6,6 +6,6 @@ class Topic < ActiveRecord::Base
 
 
   has_many :reviews #複數
-
+  belongs_to :category
   belongs_to :user
 end
