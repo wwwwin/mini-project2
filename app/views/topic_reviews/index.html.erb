@@ -1,24 +1,42 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h2><%= @topic.title %></h2>
-    <p>文章分類: <%= @topic.category.name %><p>
-    <p>文章群組:
-      <% @topic.selects.each do |s| %>
-        *<%= s.name %>
-      <% end %>
-    </p>
+    <ul class="nav nav-pills" role="tablist">
+      <li role="presentation" >
+        <a href="#">文章分類: <%= @topic.category.name %></a>
+      </li>
+
+      <li role="presentation">
+        <a href="#">文章群組:
+          <% @topic.selects.each do |s| %>
+            <%= s.name %>
+          <% end %>
+        </a>
+      </li>
+
+      <li role="presentation">
+        <a href="#">留言數：<span class="badge"><%= @reviews.count %></span></a>
+      </li>
+    </ul>
+
+    <%# 文章分類: <%= @topic.category.name %>
+
+      <%# 文章群組: @topic.selects.each do |s| %>
+        <%# s.name %>
+      <%# end %>
+
   </div>
 
   <div class="panel-body">
     <%= @topic.article %>
   </div>
+
 </div>
   <%= form_for @review, :url => { :controller => 'topic_reviews', :action => 'create' } do |f| %>
       <%= render :partial => 'form', :locals => { :f => f } %>
       <%= link_to '回到論壇首頁', topics_path, :class => "btn btn-default" %>
       <%= f.submit "新增留言", :class => "btn btn-primary" %>
   <% end %>
-
 
 <table class="table">
   <thead>

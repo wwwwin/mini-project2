@@ -2,6 +2,12 @@ class TopicReviewsController < ApplicationController
 
   before_action :set_topic
 
+  def topic_reviews_count
+    @topic = Topic.find( params[:topic_id] )
+    @review = @topic.reviews.find( params[:id] )
+    @count = @review.comment.count
+  end
+
   def index
     @topic = Topic.find( params[:topic_id] )
     @reviews = @topic.reviews.order(created_at: :desc).page(params[:page]).per(8)
@@ -21,7 +27,7 @@ class TopicReviewsController < ApplicationController
     @review = @topic.reviews.build( review_params )
      @review.user = current_user
     if @review.save
-      byebug
+
       redirect_to topic_reviews_url( @topic )
 
     else
