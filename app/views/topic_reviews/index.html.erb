@@ -1,15 +1,16 @@
 <div class="panel panel-default">
-  <div class="panel-heading">
-    <h2><%= @topic.title %></h2>
+    <div class="panel-heading">
+      <h2><%= @topic.title %></h2>
+    </div>
     <ul class="nav nav-pills" role="tablist">
       <li role="presentation" >
-        <a href="#">文章分類: <%= @topic.category.name %></a>
+       <a href="#">文章分類: <%= @topic.category.name %></a>
       </li>
 
       <li role="presentation">
         <a href="#">文章群組:
           <% @topic.selects.each do |s| %>
-            <%= s.name %>
+          <%= s.name %>
           <% end %>
         </a>
       </li>
@@ -19,52 +20,47 @@
       </li>
     </ul>
 
-    <%# 文章分類: <%= @topic.category.name %>
+      <%# 文章分類: <%= @topic.category.name %>
 
-      <%# 文章群組: @topic.selects.each do |s| %>
-        <%# s.name %>
-      <%# end %>
+        <%# 文章群組: @topic.selects.each do |s| %>
+          <%# s.name %>
+        <%# end %>
 
-  </div>
+    <div class="panel-body">
+      <%= @topic.article %>
+      <%= form_for @review, :url => { :controller => 'topic_reviews', :action => 'create' } do |f| %>
+          <%= render :partial => 'form', :locals => { :f => f } %>
+          <%= link_to '回到論壇首頁', topics_path, :class => "btn btn-default" %>
+          <%= f.submit "新增留言", :class => "btn btn-primary" %>
+      <% end %>
+    </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>留言者</th>
+        <th>留言內容</th>
+        <th>留言時間</th>
+        <th>工具</th>
+      </tr>
+    </thead>
+  <% @reviews.each do |review| %>
+    <tbody>
+      <td>
+        <%= review.user.try(:first_name) %>
+      </td>
+      <td>
+        <%= review.comment %>
+      </td>
+      <td>
+        <%= review.created_at %>
+      </td>
+      <td>
+        <%= link_to '刪除留言', topic_review_path(@topic, review),:method => :delete, :class => "btn btn-danger" %>
+      </td>
 
-  <div class="panel-body">
-    <%= @topic.article %>
-  </div>
-
+      <% end %>
+    </tbody>
+  </table>
 </div>
-  <%= form_for @review, :url => { :controller => 'topic_reviews', :action => 'create' } do |f| %>
-      <%= render :partial => 'form', :locals => { :f => f } %>
-      <%= link_to '回到論壇首頁', topics_path, :class => "btn btn-default" %>
-      <%= f.submit "新增留言", :class => "btn btn-primary" %>
-  <% end %>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>留言者</th>
-      <th>留言內容</th>
-      <th>留言時間</th>
-      <th>工具</th>
-    </tr>
-  </thead>
-<% @reviews.each do |review| %>
-  <tbody>
-    <td>
-      <%= review.user.try(:first_name) %>
-    </td>
-    <td>
-      <%= review.comment %>
-    </td>
-    <td>
-      <%= review.created_at %>
-    </td>
-    <td>
-      <%= link_to '刪除留言', topic_review_path(@topic, review),:method => :delete, :class => "btn btn-danger" %>
-    </td>
-
-    <% end %>
-  </tbody>
-</table>
-
 
 <%# link_to "新增留言", new_topic_review_path, :class => "btn btn-primary"  %>

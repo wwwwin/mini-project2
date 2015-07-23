@@ -4,5 +4,5 @@ class Review < ActiveRecord::Base
 
   belongs_to :user #單數
 
-  belongs_to :topic #單數
+  belongs_to :topic, :counter_cache => true#單數
 end

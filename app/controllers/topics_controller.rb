@@ -1,10 +1,11 @@
 class TopicsController < ApplicationController
 
+  helper_method :sort_column, :sort_direction
   before_action :authenticate_user!
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
   def index
-    @topics = Topic.order(updated_at: :desc).page(params[:page]).per(8)
+    @topics = Topic.order(sort_column + " " + sort_direction).page(params[:page]).per(8)
     @topic = Topic.new
   end
 
@@ -60,6 +61,16 @@ class TopicsController < ApplicationController
       @topic = Topic.find(params[:id])
     end
 
+    def sort_column
+      params[:sort] || "created_at"
+    end
+
+    def sort_direction
+      params[:direction] || "asc"
+    end
+
+
 end
+
 
 

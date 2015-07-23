@@ -1,35 +1,38 @@
-<table class="table">
-  <h1>Hi! Win! </h1>
-  <% @topics.each do |topic| %>
-  <tr>
-    <td>
-      <p><%= topic.category.try(:name) %></p>
-    </td>
-    <td>
-      <%= topic.title %>
-    </td>
-    <td>
-      <%= topic.user.try(:short_name) %>
-    </td>
-    <td>
-      <%= topic.created_at %>
-    </td>
+<div class="panel panel-default">
+  <table class="table">
+    <div class="panel-heading">
+      <h1>Hi! Win! </h1>
+      <% if current_user %>
+        Hi!,<%= current_user.try(:short_name) %>
+        <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
+        <%= link_to('修改密碼', edit_registration_path(:user)) %>
+      <% else %>
+        <%= link_to('註冊', new_registration_path(:user)) %> |
+        <%= link_to('登入', new_session_path(:user)) %>
+      <% end %>
 
-    <td>
-      <%# link_to "Show", topic_path(topic), :class => "btn btn-info"   %>
-    </td>
-    <td>
-      <%= link_to "Edit", edit_topic_path(topic), :class => "btn btn-info"  %>
-    </td>
-    <td>
-      <%= link_to "Delete", topic_path(topic), :method => :delete, :data => {:confirm => "你確定要刪除資料?"}, :class => "btn btn-danger" %>
-    </td>
-    <td>
-      <%= link_to "Reviews", topic_reviews_path(topic), :class => "btn btn-info"  %>
-    </td>
-  <% end %>
-  </tr>
-</table>
+      <%= sortable "reviews_count"%>
+
+      <tr>
+        <th><%= sortable "created_at" %></th>
+        <th><%= sortable "reviews_count" %></th>
+      </tr>
+    </div>
+
+      <% @topics.each do |topic| %>
+        <tr>
+          <td>主題：<%= topic.title%></td>
+          <td >回覆數：<%= topic.reviews.size %></td>
+          <td>類別：<%= topic.category.try(:name) %></td>
+          <td><%= topic.user.try(:short_name) %></td>
+          <td><%= topic.created_at %></td>
+          <td><%= link_to "Edit", edit_topic_path(topic), :class => "btn btn-info"  %></td>
+          <td><%= link_to "Delete", topic_path(topic), :method => :delete, :data => {:confirm => "你確定要刪除資料?"}, :class => "btn btn-danger" %></td>
+          <td><%= link_to "Reviews", topic_reviews_path(topic), :class => "btn btn-info"  %></td>
+        </tr>
+      <% end %>
+  </table>
+</div>
 <%# link_to "new", new_topic_path, :class => "btn btn-primary"  %>
 
 <%= form_for @topic, :url => { :controller => 'topics', :action => 'create' } do |f| %>
